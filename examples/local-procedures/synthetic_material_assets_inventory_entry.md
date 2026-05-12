@@ -1,6 +1,6 @@
 # Synthetic material assets inventory entry
 
-> Public-safe example. Инвентарные номера и модели тестовые.
+> Synthetic example. Инвентарные номера и модели тестовые.
 
 ## Передача имущества
 
