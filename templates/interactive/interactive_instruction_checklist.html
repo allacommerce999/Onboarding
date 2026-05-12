@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Интерактивный чек-лист инструктажей</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f9;
+      --panel: #ffffff;
+      --text: #1f2933;
+      --muted: #5d6774;
+      --line: #d9dee7;
+      --accent: #146c94;
+      --accent-strong: #0f5574;
+      --ok: #1f7a4d;
+      --warn: #9a5b00;
+      --hold: #8a3ffc;
+      --shadow: 0 10px 24px rgba(22, 34, 51, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    header {
+      background: #17324d;
+      color: #fff;
+      padding: 24px clamp(16px, 4vw, 48px);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(24px, 3vw, 36px);
+      letter-spacing: 0;
+    }
+
+    header p {
+      margin: 0;
+      max-width: 900px;
+      color: #dbe7f3;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: minmax(240px, 320px) minmax(0, 1fr);
+      gap: 20px;
+      padding: 20px clamp(12px, 3vw, 32px) 36px;
+    }
+
+    aside,
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    aside {
+      align-self: start;
+      padding: 16px;
+      position: sticky;
+      top: 16px;
+    }
+
+    section {
+      padding: 18px;
+    }
+
+    h2, h3 {
+      margin: 0 0 12px;
+      letter-spacing: 0;
+    }
+
+    h2 { font-size: 20px; }
+    h3 { font-size: 17px; }
+
+    label {
+      display: block;
+      font-weight: 700;
+      margin: 14px 0 6px;
+    }
+
+    select,
+    input[type="text"] {
+      width: 100%;
+      min-height: 40px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 8px 10px;
+      font: inherit;
+      color: var(--text);
+      background: #fff;
+    }
+
+    .filters {
+      display: grid;
+      gap: 8px;
+      margin: 8px 0 14px;
+    }
+
+    .filter-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 400;
+      margin: 0;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    button {
+      border: 1px solid var(--accent);
+      border-radius: 6px;
+      background: var(--accent);
+      color: #fff;
+      min-height: 40px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    button.secondary {
+      background: #fff;
+      color: var(--accent-strong);
+    }
+
+    button:focus-visible,
+    select:focus-visible,
+    input:focus-visible {
+      outline: 3px solid #f6c85f;
+      outline-offset: 2px;
+    }
+
+    .progress-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(110px, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: #fbfcfe;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 22px;
+    }
+
+    .category {
+      border-top: 1px solid var(--line);
+      padding-top: 16px;
+      margin-top: 16px;
+    }
+
+    .category:first-of-type {
+      border-top: 0;
+      margin-top: 0;
+      padding-top: 0;
+    }
+
+    .items {
+      display: grid;
+      gap: 10px;
+    }
+
+    .item {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: #fff;
+    }
+
+    .item-head {
+      display: grid;
+      grid-template-columns: auto 1fr minmax(150px, 190px);
+      gap: 10px;
+      align-items: start;
+    }
+
+    .item-title {
+      font-weight: 700;
+    }
+
+    .item-meta {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .status {
+      min-height: 36px;
+    }
+
+    .badge {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 13px;
+      color: #fff;
+      background: var(--muted);
+      white-space: nowrap;
+    }
+
+    .badge.ready { background: var(--ok); }
+    .badge.work { background: var(--accent); }
+    .badge.hold { background: var(--hold); }
+    .badge.warn { background: var(--warn); }
+
+    .disclaimer {
+      margin-top: 18px;
+      padding: 12px;
+      border: 1px solid #f0c36d;
+      border-radius: 8px;
+      background: #fff8e8;
+      color: #594100;
+    }
+
+    .hidden { display: none; }
+
+    @media (max-width: 820px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+
+      aside {
+        position: static;
+      }
+
+      .progress-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .item-head {
+        grid-template-columns: auto 1fr;
+      }
+
+      .status {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media print {
+      body { background: #fff; }
+      header, aside, button { display: none; }
+      main { display: block; padding: 0; }
+      section { border: 0; box-shadow: none; }
+      .item { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Интерактивный чек-лист инструктажей</h1>
+    <p>Public-safe demo для выбора базовых onboarding-процедур. Файл не содержит реальных данных и не заменяет согласование HR, ОТ, ИБ и профильных ответственных.</p>
+  </header>
+
+  <main>
+    <aside>
+      <h2>Параметры</h2>
+
+      <label for="profile">Профиль</label>
+      <select id="profile">
+        <option value="office">Офисный ИТ-сотрудник</option>
+        <option value="remote">Удаленный ИТ-сотрудник</option>
+        <option value="field">Выездной электросетевой сотрудник</option>
+        <option value="contractor">Подрядчик</option>
+      </select>
+
+      <label for="owner">Ответственный за пакет</label>
+      <input id="owner" type="text" value="HR / руководитель" aria-label="Ответственный за пакет">
+
+      <label>Фильтр статуса</label>
+      <div class="filters" id="filters">
+        <label class="filter-option"><input type="checkbox" value="todo" checked> не начато</label>
+        <label class="filter-option"><input type="checkbox" value="work" checked> в работе</label>
+        <label class="filter-option"><input type="checkbox" value="ready" checked> готово</label>
+        <label class="filter-option"><input type="checkbox" value="hold" checked> требует согласования</label>
+      </div>
+
+      <div class="actions">
+        <button type="button" id="markReady">Отметить базовое</button>
+        <button type="button" class="secondary" id="reset">Сбросить</button>
+        <button type="button" class="secondary" id="print">Печать</button>
+      </div>
+    </aside>
+
+    <section aria-live="polite">
+      <h2 id="profileTitle">Офисный ИТ-сотрудник</h2>
+
+      <div class="progress-grid" id="metrics"></div>
+      <div id="checklist"></div>
+
+      <div class="disclaimer">
+        Это демонстрационный шаблон. Реальные программы инструктажей, журналы, допуски и формулировки должны быть проверены HR, ОТ, ИБ и профильными ответственными по действующей редакции локальных документов.
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const categories = [
+      {
+        id: 'base',
+        title: 'Базовые процедуры',
+        items: [
+          ['pvtr', 'ПВТР', 'HR', 'Ознакомить с режимом работы и зафиксировать подтверждение.'],
+          ['ot', 'Охрана труда', 'Специалист ОТ', 'Провести вводный инструктаж и запись в журнале.'],
+          ['fire', 'Пожарная безопасность', 'Ответственный за ПБ', 'Показать эвакуацию, место сбора и порядок сообщения.']
+        ]
+      },
+      {
+        id: 'it',
+        title: 'ИТ и ИБ',
+        items: [
+          ['security', 'ЛВС и ИБ', 'ИБ / IT', 'Подтвердить правила паролей, MFA и сообщений об инцидентах.'],
+          ['access', 'Базовые доступы', 'IAM / IT', 'Оформить учетную запись и стандартные сервисы.']
+        ]
+      },
+      {
+        id: 'office',
+        title: 'Офис и имущество',
+        items: [
+          ['assets', 'Оборудование', 'IT Workplace', 'Передать устройство и зафиксировать имущество.'],
+          ['pass', 'Электронный пропуск', 'HR / АХО', 'Оформить доступ в здание без публикации номера пропуска.'],
+          ['keys', 'Кабинет и ключи', 'АХО', 'Выдать доступ только после подтверждения руководителя.'],
+          ['parking', 'Парковка', 'АХО', 'Оформить только при согласовании и synthetic данных в примере.']
+        ]
+      },
+      {
+        id: 'field',
+        title: 'Выездные работы',
+        items: [
+          ['electrical', 'Электроустановки', 'Профильный руководитель', 'Требует профильной проверки, обучения и допуска.', 'hold'],
+          ['height', 'Работа на высоте', 'Специалист ОТ', 'Требует профильной проверки и допуска.', 'hold']
+        ]
+      }
+    ];
+
+    const profiles = {
+      office: {
+        title: 'Офисный ИТ-сотрудник',
+        include: ['base', 'it', 'office'],
+        skip: []
+      },
+      remote: {
+        title: 'Удаленный ИТ-сотрудник',
+        include: ['base', 'it'],
+        skip: ['pass', 'keys', 'parking']
+      },
+      field: {
+        title: 'Выездной электросетевой сотрудник',
+        include: ['base', 'it', 'office', 'field'],
+        skip: []
+      },
+      contractor: {
+        title: 'Подрядчик',
+        include: ['base', 'it', 'office'],
+        skip: ['parking']
+      }
+    };
+
+    const state = {};
+    const statusText = {
+      todo: 'не начато',
+      work: 'в работе',
+      ready: 'готово',
+      hold: 'требует согласования'
+    };
+
+    const statusClass = {
+      todo: '',
+      work: 'work',
+      ready: 'ready',
+      hold: 'hold'
+    };
+
+    const profileEl = document.querySelector('#profile');
+    const checklistEl = document.querySelector('#checklist');
+    const metricsEl = document.querySelector('#metrics');
+    const titleEl = document.querySelector('#profileTitle');
+    const filtersEl = document.querySelector('#filters');
+
+    function keyFor(itemId) {
+      return `${profileEl.value}:${itemId}`;
+    }
+
+    function selectedStatuses() {
+      return [...filtersEl.querySelectorAll('input:checked')].map(input => input.value);
+    }
+
+    function itemsForProfile() {
+      const profile = profiles[profileEl.value];
+      const skip = new Set(profile.skip);
+      return categories
+        .filter(category => profile.include.includes(category.id))
+        .map(category => ({
+          ...category,
+          items: category.items.filter(item => !skip.has(item[0]))
+        }))
+        .filter(category => category.items.length > 0);
+    }
+
+    function getStatus(item) {
+      return state[keyFor(item[0])] || item[4] || 'todo';
+    }
+
+    function setStatus(itemId, status) {
+      state[keyFor(itemId)] = status;
+      render();
+    }
+
+    function renderMetrics(flatItems) {
+      const total = flatItems.length;
+      const counts = { todo: 0, work: 0, ready: 0, hold: 0 };
+      flatItems.forEach(item => counts[getStatus(item)] += 1);
+      metricsEl.innerHTML = [
+        ['Всего', total],
+        ['Готово', counts.ready],
+        ['В работе', counts.work],
+        ['Согласование', counts.hold]
+      ].map(([label, value]) => `<div class="metric"><strong>${value}</strong>${label}</div>`).join('');
+    }
+
+    function render() {
+      const profile = profiles[profileEl.value];
+      const activeStatuses = selectedStatuses();
+      const profileCategories = itemsForProfile();
+      const flatItems = profileCategories.flatMap(category => category.items);
+      titleEl.textContent = profile.title;
+      renderMetrics(flatItems);
+
+      checklistEl.innerHTML = profileCategories.map(category => {
+        const items = category.items.filter(item => activeStatuses.includes(getStatus(item)));
+        if (!items.length) return '';
+        return `
+          <div class="category">
+            <h3>${category.title}</h3>
+            <div class="items">
+              ${items.map(item => {
+                const status = getStatus(item);
+                return `
+                  <article class="item">
+                    <div class="item-head">
+                      <input type="checkbox" ${status === 'ready' ? 'checked' : ''} aria-label="Отметить ${item[1]} готовым" data-check="${item[0]}">
+                      <div>
+                        <div class="item-title">${item[1]}</div>
+                        <div class="item-meta">Ответственный: ${item[2]}. ${item[3]}</div>
+                      </div>
+                      <select class="status" aria-label="Статус ${item[1]}" data-status="${item[0]}">
+                        ${Object.entries(statusText).map(([value, label]) => `<option value="${value}" ${value === status ? 'selected' : ''}>${label}</option>`).join('')}
+                      </select>
+                    </div>
+                    <div class="item-meta"><span class="badge ${statusClass[status]}">${statusText[status]}</span></div>
+                  </article>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    checklistEl.addEventListener('change', event => {
+      const checkId = event.target.dataset.check;
+      const statusId = event.target.dataset.status;
+      if (checkId) setStatus(checkId, event.target.checked ? 'ready' : 'todo');
+      if (statusId) setStatus(statusId, event.target.value);
+    });
+
+    profileEl.addEventListener('change', render);
+    filtersEl.addEventListener('change', render);
+    document.querySelector('#print').addEventListener('click', () => window.print());
+    document.querySelector('#reset').addEventListener('click', () => {
+      Object.keys(state).forEach(key => delete state[key]);
+      render();
+    });
+    document.querySelector('#markReady').addEventListener('click', () => {
+      itemsForProfile().flatMap(category => category.items).forEach(item => {
+        if ((item[4] || 'todo') !== 'hold') state[keyFor(item[0])] = 'ready';
+      });
+      render();
+    });
+
+    render();
+  </script>
+</body>
+</html>

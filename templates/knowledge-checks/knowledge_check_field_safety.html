@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Проверка знаний: выездные работы</title>
+  <style>
+    body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: #f5f7fa; color: #1f2933; line-height: 1.5; }
+    main { max-width: 860px; margin: 0 auto; padding: 24px 14px 40px; }
+    header, form, .result { background: #fff; border: 1px solid #d9dee7; border-radius: 8px; padding: 18px; box-shadow: 0 8px 20px rgba(22, 34, 51, .08); }
+    header { margin-bottom: 14px; border-top: 6px solid #7c3aed; }
+    h1 { margin: 0 0 8px; font-size: 28px; letter-spacing: 0; }
+    h2 { font-size: 18px; margin: 18px 0 8px; letter-spacing: 0; }
+    label { display: block; padding: 6px 0; }
+    input { margin-right: 8px; }
+    button { margin-top: 16px; min-height: 40px; border: 0; border-radius: 6px; padding: 8px 14px; background: #7c3aed; color: #fff; font: inherit; cursor: pointer; }
+    .secondary { background: #fff; color: #7c3aed; border: 1px solid #7c3aed; }
+    .result { margin-top: 14px; }
+    .muted { color: #5d6774; }
+    .pass { color: #1f7a4d; font-weight: 700; }
+    .warn { color: #9a5b00; font-weight: 700; }
+    @media print { button { display: none; } body { background: #fff; } header, form, .result { box-shadow: none; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Проверка знаний: выездные работы</h1>
+      <p class="muted">Короткая проверка для электроустановок, высоты и объектовых работ. Не является допуском.</p>
+    </header>
+    <form id="quiz">
+      <h2>1. Можно ли начинать работы в электроустановках только после onboarding-чеклиста?</h2>
+      <label><input type="radio" name="q1"> Да, если чек-лист заполнен</label>
+      <label><input type="radio" name="q1" data-correct="true"> Нет, нужна профильная проверка и допуск ответственными лицами</label>
+      <label><input type="radio" name="q1"> Да, если сотрудник опытный</label>
+
+      <h2>2. Что делать, если вид работ или допуск непонятны?</h2>
+      <label><input type="radio" name="q2" data-correct="true"> Оставить статус `требует профильной проверки` и уточнить у ответственных</label>
+      <label><input type="radio" name="q2"> Начать с простых работ без оформления</label>
+      <label><input type="radio" name="q2"> Спросить любого коллегу устно</label>
+
+      <h2>3. Что делать при небезопасных условиях на объекте?</h2>
+      <label><input type="radio" name="q3"> Продолжить, если осталось мало времени</label>
+      <label><input type="radio" name="q3" data-correct="true"> Остановить работу и сообщить руководителю или ответственному</label>
+      <label><input type="radio" name="q3"> Зафиксировать после завершения работ</label>
+
+      <button type="button" id="check">Проверить</button>
+      <button type="button" class="secondary" onclick="window.print()">Печать</button>
+    </form>
+    <div class="result" id="result" aria-live="polite">Ответьте на 3 вопроса. Достаточно 2 правильных ответов из 3.</div>
+  </main>
+  <script>
+    document.querySelector('#check').addEventListener('click', () => {
+      const total = 3;
+      const correct = [...document.querySelectorAll('input[data-correct="true"]')].filter(input => input.checked).length;
+      document.querySelector('#result').innerHTML = correct >= 2
+        ? `<span class="pass">Зачтено: ${correct}/${total}</span>. Это не допуск, а подтверждение понимания ключевых правил.`
+        : `<span class="warn">Нужно повторить: ${correct}/${total}</span>. Разберите профильные ограничения с руководителем и ОТ.`;
+    });
+  </script>
+</body>
+</html>
