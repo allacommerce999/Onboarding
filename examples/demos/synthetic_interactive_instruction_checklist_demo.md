@@ -1,4 +1,4 @@
-# Synthetic demo: interactive instruction checklist
+# Demo: interactive instruction checklist
 
 Файл проверки: `templates/interactive/interactive_instruction_checklist.html`
 

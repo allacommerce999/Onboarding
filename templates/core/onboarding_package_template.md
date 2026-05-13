@@ -70,12 +70,12 @@
 
 | Направление | Пример инструкции | HTML-проверка знаний |
 |-------------|-------------------|----------------------|
-| ПВТР | `examples/instructions/synthetic_instruction_pvtr.md` | `templates/knowledge-checks/knowledge_check_pvtr.html` |
-| Охрана труда | `examples/instructions/synthetic_instruction_occupational_safety.md` | `templates/knowledge-checks/knowledge_check_occupational_safety.html` |
-| Пожарная безопасность | `examples/instructions/synthetic_instruction_fire_safety.md` | `templates/knowledge-checks/knowledge_check_fire_safety.html` |
-| Первая помощь | `examples/instructions/synthetic_instruction_first_aid.md` | `templates/knowledge-checks/knowledge_check_first_aid.html` |
-| ЛВС и ИБ | `examples/instructions/synthetic_instruction_local_network_security.md` | `templates/knowledge-checks/knowledge_check_local_network_security.html` |
-| Выездные работы | `examples/instructions/synthetic_instruction_field_safety.md` | `templates/knowledge-checks/knowledge_check_field_safety.html` |
+| ПВТР | `examples/instructions/` | `templates/knowledge-checks/knowledge_check_pvtr.html` |
+| Охрана труда | `examples/instructions/` | `templates/knowledge-checks/knowledge_check_occupational_safety.html` |
+| Пожарная безопасность | `examples/instructions/` | `templates/knowledge-checks/knowledge_check_fire_safety.html` |
+| Первая помощь | `examples/instructions/` | `templates/knowledge-checks/knowledge_check_first_aid.html` |
+| ЛВС и ИБ | `examples/instructions/` | `templates/knowledge-checks/knowledge_check_local_network_security.html` |
+| Выездные работы | `examples/instructions/` | `templates/knowledge-checks/knowledge_check_field_safety.html` |
 
 ### Короткий чек-лист
 
@@ -83,7 +83,7 @@
 - [ ] Подобраны примеры инструкций и простые проверки знаний.
 - [ ] Профильные допуски не отмечены как выданные.
 - [ ] Реальные инструкции, журналы и формулировки проверят HR/ОТ/ИБ.
-- [ ] Нет реальных персональных данных, внутренних документов, секретов и маршрутов доступа.
+- [ ] Все доступы и допуски имеют понятный статус согласования.
 
 ## 6. Открытые вопросы
 
