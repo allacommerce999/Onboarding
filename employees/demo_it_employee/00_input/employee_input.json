@@ -1,0 +1,76 @@
+{
+  "employee": {
+    "full_name": "Тестов Денис Сергеевич",
+    "position": "Инженер СПО",
+    "department": "Команда сопровождения тестовых сервисов",
+    "start_date": "2026-06-01",
+    "work_format": "удаленно",
+    "manager": "Макетов Павел Олегович",
+    "hr_contact": "Синтетикова Анна Игоревна",
+    "buddy": "Примерова Мария Олеговна"
+  },
+  "documents": {
+    "resource_access": true,
+    "inventory_inclusion": true,
+    "building_pass": true,
+    "room_key": false,
+    "parking": false,
+    "equipment_handover": true,
+    "welcome_email": true,
+    "instructions": true
+  },
+  "access_requests": [
+    {
+      "name": "TEST-DOMAIN account",
+      "type": "доменная учетная запись",
+      "owner": "IT Service Desk"
+    },
+    {
+      "name": "TEST-DB-REPORTING",
+      "type": "БД",
+      "owner": "Data Owner",
+      "sensitivity": "database"
+    },
+    {
+      "name": "TEST-SERVER-APP",
+      "type": "сервер",
+      "owner": "Platform Owner",
+      "sensitivity": "server"
+    }
+  ],
+  "local_procedures": {
+    "equipment": [
+      {
+        "name": "Ноутбук разработчика",
+        "inventory_number": "TEST-ASSET-202"
+      },
+      {
+        "name": "Токен доступа сотрудника",
+        "inventory_number": "TEST-TOKEN-001"
+      }
+    ]
+  },
+  "instructions": {
+    "mode": "self-contained",
+    "selected": [
+      "pvtr",
+      "occupational_safety",
+      "information_security"
+    ]
+  },
+  "generation": {
+    "output_slug": "demo_it_employee",
+    "package_mode": "draft",
+    "output_dir": "employees"
+  },
+  "accounts": {
+    "email_domain": "test12systems.ru",
+    "sender_email": "hr@test12systems.ru",
+    "suggested_login": "testovds",
+    "suggested_email": "testovds@test12systems.ru"
+  },
+  "open_questions": [
+    "Доступ к 'TEST-DB-REPORTING' требует согласования владельца ресурса.",
+    "Доступ к 'TEST-SERVER-APP' требует согласования владельца ресурса."
+  ]
+}

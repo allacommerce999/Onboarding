@@ -1,6 +1,14 @@
 # Private/local source documents
 doc/
 **/doc/
+instr/
+**/instr/
+
+# Local/generated employee runs
+employees/20*/
+
+# Internal migration archive
+_legacy/
 
 # Environment and secrets
 .env

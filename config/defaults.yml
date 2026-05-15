@@ -1,0 +1,4 @@
+email_domain: test12systems.ru
+sender_email: hr@test12systems.ru
+default_instruction_mode: linked
+output_dir: employees

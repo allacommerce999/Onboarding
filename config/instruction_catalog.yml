@@ -1,0 +1,31 @@
+instructions:
+  - id: pvtr
+    title: Правила внутреннего трудового распорядка
+    public_file: examples/instructions/pvtr_public_fragment.md
+    check_file: templates/knowledge-checks/knowledge_check_pvtr.html
+  - id: occupational_safety
+    title: Охрана труда при офисной работе
+    public_file: examples/instructions/occupational_safety_public_fragment.md
+    check_file: templates/knowledge-checks/knowledge_check_occupational_safety.html
+  - id: fire_safety
+    title: Пожарная безопасность
+    public_file: examples/instructions/fire_safety_public_fragment.md
+    check_file: templates/knowledge-checks/knowledge_check_fire_safety.html
+  - id: first_aid
+    title: Первая помощь
+    public_file: examples/instructions/first_aid_public_fragment.md
+    check_file: templates/knowledge-checks/knowledge_check_first_aid.html
+  - id: information_security
+    title: Информационная безопасность и работа в сети
+    public_file: examples/instructions/information_security_public_fragment.md
+    check_file: templates/knowledge-checks/knowledge_check_information_security.html
+  - id: electrical_safety
+    title: Электробезопасность и работы с электрооборудованием
+    public_file: examples/instructions/electrical_safety_public_fragment.md
+    check_file: templates/knowledge-checks/knowledge_check_electrical_safety.html
+    field_work: true
+  - id: height_work
+    title: Работы на высоте
+    public_file: examples/instructions/height_work_public_fragment.md
+    check_file: templates/knowledge-checks/knowledge_check_height_work.html
+    field_work: true

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Проверка знаний: пожарная безопасность</title>
+  <style>
+    body { margin: 0; font-family: Arial, Helvetica, sans-serif; background: #f5f7fa; color: #1f2933; line-height: 1.5; }
+    main { max-width: 860px; margin: 0 auto; padding: 24px 14px 40px; }
+    header, form, .result { background: #fff; border: 1px solid #d9dee7; border-radius: 8px; padding: 18px; box-shadow: 0 8px 20px rgba(22, 34, 51, .08); }
+    header { margin-bottom: 14px; border-top: 6px solid #9a5b00; }
+    h1 { margin: 0 0 8px; font-size: 28px; letter-spacing: 0; }
+    h2 { font-size: 18px; margin: 18px 0 8px; letter-spacing: 0; }
+    label { display: block; padding: 6px 0; }
+    input { margin-right: 8px; }
+    button { margin-top: 16px; min-height: 40px; border: 0; border-radius: 6px; padding: 8px 14px; background: #9a5b00; color: #fff; font: inherit; cursor: pointer; }
+    .secondary { background: #fff; color: #9a5b00; border: 1px solid #9a5b00; }
+    .result { margin-top: 14px; }
+    .muted { color: #5d6774; }
+    .pass { color: #1f7a4d; font-weight: 700; }
+    .warn { color: #9a5b00; font-weight: 700; }
+    @media print { button { display: none; } body { background: #fff; } header, form, .result { box-shadow: none; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Проверка знаний: пожарная безопасность</h1>
+      <p class="muted">Мини-проверка после противопожарного инструктажа.</p>
+    </header>
+    <form id="quiz">
+      <h2>1. Что нужно знать заранее?</h2>
+      <label><input type="radio" name="q1"> Где сидит ближайший коллега</label>
+      <label><input type="radio" name="q1" data-correct="true"> Путь эвакуации и место сбора</label>
+      <label><input type="radio" name="q1"> Номер парковочного места руководителя</label>
+
+      <h2>2. Что делать при признаках пожара?</h2>
+      <label><input type="radio" name="q2" data-correct="true"> Сообщить ответственным и действовать по плану эвакуации</label>
+      <label><input type="radio" name="q2"> Продолжить встречу до официального объявления</label>
+      <label><input type="radio" name="q2"> Вернуться за личными вещами</label>
+
+      <h2>3. Что нельзя блокировать?</h2>
+      <label><input type="radio" name="q3" data-correct="true"> Проходы, эвакуационные выходы и доступ к средствам пожаротушения</label>
+      <label><input type="radio" name="q3"> Только переговорные комнаты</label>
+      <label><input type="radio" name="q3"> Только рабочий стол</label>
+
+      <button type="button" id="check">Проверить</button>
+      <button type="button" class="secondary" onclick="window.print()">Печать</button>
+    </form>
+    <div class="result" id="result" aria-live="polite">Ответьте на 3 вопроса. Достаточно 2 правильных ответов из 3.</div>
+  </main>
+  <script>
+    document.querySelector('#check').addEventListener('click', () => {
+      const total = 3;
+      const correct = [...document.querySelectorAll('input[data-correct="true"]')].filter(input => input.checked).length;
+      document.querySelector('#result').innerHTML = correct >= 2
+        ? `<span class="pass">Зачтено: ${correct}/${total}</span>.`
+        : `<span class="warn">Нужно повторить: ${correct}/${total}</span>. Разберите эвакуацию и порядок сообщения.`;
+    });
+  </script>
+</body>
+</html>

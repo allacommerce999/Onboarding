@@ -1,0 +1,79 @@
+{
+  "instructions": {
+    "selected": [
+      "pvtr",
+      "occupational_safety",
+      "fire_safety",
+      "first_aid",
+      "information_security",
+      "electrical_safety",
+      "height_work"
+    ],
+    "mode": "self-contained"
+  },
+  "access_requests": [
+    {
+      "name": "TEST-FIELD-APP",
+      "owner": "Field Owner",
+      "type": "mobile app",
+      "sensitivity": "normal"
+    },
+    {
+      "name": "TEST-SERVICE-PORTAL",
+      "owner": "Service Owner",
+      "type": "service desk",
+      "sensitivity": "normal"
+    }
+  ],
+  "local_procedures": {
+    "car_number": "TEST-CAR-FIELD",
+    "parking_space": "TEST-SITE-PARKING",
+    "equipment": [
+      {
+        "name": "Demo rugged laptop",
+        "inventory_number": "TEST-ASSET-410"
+      },
+      {
+        "name": "Demo measurement kit",
+        "inventory_number": "TEST-ASSET-411"
+      }
+    ],
+    "office_address": "TEST Site A"
+  },
+  "documents": {
+    "equipment_handover": true,
+    "building_pass": true,
+    "parking": true,
+    "room_key": false,
+    "welcome_email": true,
+    "resource_access": true,
+    "inventory_inclusion": true,
+    "instructions": true
+  },
+  "generation": {
+    "output_slug": "demo_field_engineer",
+    "package_mode": "draft",
+    "output_dir": "employees"
+  },
+  "employee": {
+    "start_date": "2026-08-17",
+    "position": "Field Service Engineer",
+    "manager": "Field Demo Lead",
+    "city": "Test Site",
+    "full_name": "Demo Field Engineer",
+    "hr_contact": "Safety Demo HR",
+    "buddy": "Field Demo Buddy",
+    "work_format": "field work",
+    "department": "Field Operations"
+  },
+  "accounts": {
+    "email_domain": "test12systems.ru",
+    "sender_email": "hr@test12systems.ru",
+    "suggested_login": "demofe",
+    "suggested_email": "demofe@test12systems.ru"
+  },
+  "open_questions": [
+    "Работы с электрооборудованием требуют профильной проверки и допуска ответственным за электрохозяйство.",
+    "Работы на высоте требуют профильной проверки, обучения и допуска ответственным за ОТ."
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "employee": {
+    "full_name": "Примеров Петр Петрович",
+    "position": "Специалист документооборота",
+    "department": "Офисная команда корпоративных систем",
+    "start_date": "2026-05-25",
+    "work_format": "офис",
+    "manager": "Петров Петр Петрович",
+    "hr_contact": "Сидорова Анна Сергеевна",
+    "buddy": "Синтетикова Анна Романовна"
+  },
+  "documents": {
+    "resource_access": true,
+    "inventory_inclusion": true,
+    "building_pass": true,
+    "room_key": true,
+    "parking": true,
+    "equipment_handover": true,
+    "welcome_email": true,
+    "instructions": true
+  },
+  "access_requests": [
+    {
+      "name": "TEST-DOMAIN account",
+      "type": "доменная учетная запись",
+      "owner": "IT Service Desk"
+    },
+    {
+      "name": "TEST-WIKI",
+      "type": "база знаний",
+      "owner": "PeopleOps"
+    }
+  ],
+  "local_procedures": {
+    "room": "TEST-ROOM-12",
+    "parking_space": "TEST-PARKING-A",
+    "car_number": "A000AA TEST",
+    "equipment": [
+      {
+        "name": "Ноутбук офисный",
+        "inventory_number": "TEST-ASSET-101"
+      }
+    ]
+  },
+  "instructions": {
+    "mode": "linked",
+    "selected": [
+      "pvtr",
+      "occupational_safety",
+      "fire_safety",
+      "first_aid",
+      "information_security"
+    ]
+  },
+  "generation": {
+    "output_slug": "demo_office_employee",
+    "package_mode": "draft",
+    "output_dir": "employees"
+  },
+  "accounts": {
+    "email_domain": "test12systems.ru",
+    "sender_email": "hr@test12systems.ru",
+    "suggested_login": "primerovpp",
+    "suggested_email": "primerovpp@test12systems.ru"
+  },
+  "open_questions": []
+}

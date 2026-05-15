@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Onboarding Agent</title>
+  <link rel="stylesheet" href="/web/styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Локальный генератор</p>
+        <h1>Onboarding Agent</h1>
+      </div>
+      <div id="status" class="status status-muted">Черновик</div>
+    </header>
+
+    <form id="onboarding-form" class="workspace">
+      <section class="panel panel-primary">
+        <div class="section-title">
+          <h2>Сотрудник</h2>
+          <span class="required-help"><span class="required-swatch"></span>Обязательные поля выделены цветом и *</span>
+        </div>
+        <div class="grid two">
+          <label class="field-required"><span>ФИО <span class="required-mark">*</span></span>
+            <input name="full_name" required autocomplete="name" placeholder="Иванов Иван Иванович">
+          </label>
+          <label class="field-required"><span>Должность <span class="required-mark">*</span></span>
+            <input name="position" required placeholder="Инженер сопровождения">
+          </label>
+          <label class="field-required"><span>Подразделение / команда <span class="required-mark">*</span></span>
+            <input name="department" required placeholder="Тестовая команда корпоративных систем">
+          </label>
+          <label class="field-required"><span>Дата выхода <span class="required-mark">*</span></span>
+            <input name="start_date" type="date" required>
+          </label>
+          <label class="field-required"><span>Формат работы <span class="required-mark">*</span></span>
+            <select name="work_format" required>
+              <option value="офис" selected>Офис</option>
+              <option value="гибрид">Гибрид</option>
+              <option value="удаленно">Удаленно</option>
+              <option value="выездные работы">Выездные работы</option>
+            </select>
+          </label>
+          <label>Руководитель
+            <input name="manager" placeholder="Петров Петр Петрович">
+          </label>
+          <label>HR / ответственный
+            <input name="hr_contact" placeholder="Сидорова Анна Сергеевна">
+          </label>
+          <label>Buddy
+            <input name="buddy" placeholder="Кузнецов Алексей Игоревич">
+          </label>
+          <label>Город
+            <input name="city" placeholder="Москва">
+          </label>
+          <label>Телефон
+            <input name="phone" placeholder="+7 000 000-00-00">
+          </label>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">
+          <h2>Документы</h2>
+          <span>Нужен хотя бы один тип</span>
+        </div>
+        <div class="toggle-grid">
+          <label><input type="checkbox" name="doc_resource_access" checked> Доступы</label>
+          <label><input type="checkbox" name="doc_inventory_inclusion" checked> Инвентаризация</label>
+          <label><input type="checkbox" name="doc_building_pass" checked> Пропуск</label>
+          <label><input type="checkbox" name="doc_room_key"> Ключи</label>
+          <label><input type="checkbox" name="doc_parking"> Парковка</label>
+          <label><input type="checkbox" name="doc_equipment_handover" checked> Оборудование</label>
+          <label><input type="checkbox" name="doc_welcome_email" checked> Welcome-письмо</label>
+          <label><input type="checkbox" name="doc_instructions" checked> Инструктажи</label>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">
+          <h2>Доступы</h2>
+          <button class="secondary" type="button" id="add-access">Добавить ресурс</button>
+        </div>
+        <div id="access-list" class="rows"></div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">
+          <h2>Локальные процедуры</h2>
+          <span>Поля появляются по выбранным документам</span>
+        </div>
+        <div class="grid two">
+          <label data-dependent="doc_building_pass">Адрес или объект
+            <input name="office_address" placeholder="Тестовый офис">
+          </label>
+          <label data-dependent="doc_room_key">Кабинет / зона
+            <input name="room" placeholder="TEST-ROOM-01">
+          </label>
+          <label data-dependent="doc_parking">Парковочная зона
+            <input name="parking_space" placeholder="TEST-PARKING-A">
+          </label>
+          <label data-dependent="doc_parking">Автомобиль
+            <input name="car_number" placeholder="A000AA TEST">
+          </label>
+        </div>
+        <div data-dependent="doc_equipment_handover">
+          <div class="inline-title">
+            <h3>Оборудование</h3>
+            <button class="secondary" type="button" id="add-equipment">Добавить</button>
+          </div>
+          <div id="equipment-list" class="rows"></div>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">
+          <h2>Инструктажи</h2>
+          <select name="instruction_mode">
+            <option value="linked">Ссылки на инструкции</option>
+            <option value="self-contained">Пакет с инструкциями</option>
+          </select>
+        </div>
+        <div id="instruction-list" class="toggle-grid"></div>
+      </section>
+
+      <section class="panel">
+        <div class="section-title">
+          <h2>Email и выпуск</h2>
+          <span>Письмо создается как `.eml`</span>
+        </div>
+        <div class="grid two">
+          <label>Известный e-mail
+            <input name="known_email" type="email" placeholder="если уже выдан">
+          </label>
+          <label>Тестовый домен
+            <input name="email_domain" value="test12systems.ru">
+          </label>
+          <label>Отправитель
+            <input name="sender_email" type="email" value="hr@test12systems.ru">
+          </label>
+          <label>Режим пакета
+            <select name="package_mode">
+              <option value="draft">Черновик</option>
+              <option value="final">Финальный после проверки</option>
+            </select>
+          </label>
+        </div>
+      </section>
+
+      <section class="actionbar">
+        <div id="form-errors" class="errors" aria-live="polite"></div>
+        <button id="generate" class="primary" type="submit" disabled>Сформировать пакет документов</button>
+      </section>
+    </form>
+
+    <section id="result" class="result" hidden></section>
+  </main>
+
+  <script src="/web/app.js"></script>
+</body>
+</html>

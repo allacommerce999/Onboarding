@@ -1,0 +1,22 @@
+documents:
+  resource_access:
+    output: 02_access/service_memo_resource_access.docx
+    status: requires_approval
+  inventory_inclusion:
+    output: 03_local_procedures/service_memo_inventory_inclusion.docx
+    status: requires_processing
+  building_pass:
+    output: 03_local_procedures/building_pass_request.docx
+    status: requires_security_confirmation
+  room_key:
+    output: 03_local_procedures/room_key_request.docx
+    status: requires_facility_confirmation
+  parking:
+    output: 03_local_procedures/parking_access_list_updated.xlsx
+    status: requires_approval
+  welcome_email:
+    output: 05_email/welcome_email.eml
+    status: draft_only
+  instructions:
+    output: 04_instructions/assigned_instructions.md
+    status: assigned_not_completed

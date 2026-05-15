@@ -1,0 +1,75 @@
+{
+  "instructions": {
+    "selected": [
+      "pvtr",
+      "occupational_safety",
+      "fire_safety",
+      "first_aid",
+      "information_security"
+    ],
+    "mode": "self-contained"
+  },
+  "access_requests": [
+    {
+      "name": "TEST-DMS",
+      "owner": "Office Owner",
+      "type": "document workflow",
+      "sensitivity": "normal"
+    },
+    {
+      "name": "TEST-MAIL",
+      "owner": "IT Service Desk",
+      "type": "corporate mail",
+      "sensitivity": "normal"
+    }
+  ],
+  "local_procedures": {
+    "car_number": "TEST-CAR-024",
+    "parking_space": "TEST-PARKING-B2",
+    "room": "TEST-ROOM-24",
+    "equipment": [
+      {
+        "name": "Demo laptop",
+        "inventory_number": "TEST-ASSET-310"
+      },
+      {
+        "name": "Demo headset",
+        "inventory_number": "TEST-ASSET-311"
+      }
+    ],
+    "office_address": "TEST Office, Demo Street 1"
+  },
+  "documents": {
+    "equipment_handover": true,
+    "building_pass": true,
+    "parking": true,
+    "room_key": true,
+    "welcome_email": true,
+    "resource_access": true,
+    "inventory_inclusion": true,
+    "instructions": true
+  },
+  "generation": {
+    "output_slug": "demo_office_full_access",
+    "package_mode": "draft",
+    "output_dir": "employees"
+  },
+  "employee": {
+    "start_date": "2026-08-10",
+    "position": "Office Coordinator",
+    "manager": "Office Demo Lead",
+    "city": "Test City",
+    "full_name": "Demo Office Coordinator",
+    "hr_contact": "PeopleOps Demo",
+    "buddy": "Admin Demo Buddy",
+    "work_format": "office",
+    "department": "Administration"
+  },
+  "accounts": {
+    "email_domain": "test12systems.ru",
+    "sender_email": "hr@test12systems.ru",
+    "suggested_login": "demooc",
+    "suggested_email": "demooc@test12systems.ru"
+  },
+  "open_questions": []
+}

@@ -1,0 +1,59 @@
+{
+  "instructions": {
+    "selected": [
+      "pvtr",
+      "information_security"
+    ],
+    "mode": "linked"
+  },
+  "access_requests": [
+    {
+      "name": "TEST-CRM",
+      "owner": "Business Owner",
+      "type": "business profile",
+      "sensitivity": "normal"
+    },
+    {
+      "name": "TEST-KB",
+      "owner": "PeopleOps",
+      "type": "knowledge base",
+      "sensitivity": "normal"
+    }
+  ],
+  "local_procedures": {
+    "equipment": []
+  },
+  "documents": {
+    "equipment_handover": false,
+    "building_pass": false,
+    "parking": false,
+    "room_key": false,
+    "welcome_email": true,
+    "resource_access": true,
+    "inventory_inclusion": false,
+    "instructions": true
+  },
+  "generation": {
+    "output_slug": "demo_remote_analyst",
+    "package_mode": "draft",
+    "output_dir": "employees"
+  },
+  "employee": {
+    "start_date": "2026-08-03",
+    "position": "Customer Success Analyst",
+    "manager": "Demo Manager",
+    "city": "Test City",
+    "full_name": "Demo Remote Analyst",
+    "hr_contact": "Demo HR",
+    "buddy": "Demo Buddy",
+    "work_format": "remote",
+    "department": "Remote Operations"
+  },
+  "accounts": {
+    "email_domain": "test12systems.ru",
+    "sender_email": "hr@test12systems.ru",
+    "suggested_login": "demora",
+    "suggested_email": "demora@test12systems.ru"
+  },
+  "open_questions": []
+}

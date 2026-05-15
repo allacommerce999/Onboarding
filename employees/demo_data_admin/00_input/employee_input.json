@@ -1,0 +1,79 @@
+{
+  "instructions": {
+    "selected": [
+      "pvtr",
+      "information_security",
+      "occupational_safety"
+    ],
+    "mode": "linked"
+  },
+  "access_requests": [
+    {
+      "name": "TEST-DB-REPORTING",
+      "owner": "Data Owner",
+      "type": "database",
+      "sensitivity": "database"
+    },
+    {
+      "name": "TEST-SERVER-APP",
+      "owner": "Platform Owner",
+      "type": "server",
+      "sensitivity": "server"
+    },
+    {
+      "name": "TEST-MONITORING",
+      "owner": "SRE Owner",
+      "type": "monitoring",
+      "sensitivity": "admin"
+    }
+  ],
+  "local_procedures": {
+    "equipment": [
+      {
+        "name": "Demo admin laptop",
+        "inventory_number": "TEST-ASSET-510"
+      },
+      {
+        "name": "Demo hardware token",
+        "inventory_number": "TEST-TOKEN-510"
+      }
+    ]
+  },
+  "documents": {
+    "equipment_handover": true,
+    "building_pass": true,
+    "parking": false,
+    "room_key": false,
+    "welcome_email": true,
+    "resource_access": true,
+    "inventory_inclusion": true,
+    "instructions": true
+  },
+  "generation": {
+    "output_slug": "demo_data_admin",
+    "package_mode": "draft",
+    "output_dir": "employees"
+  },
+  "employee": {
+    "start_date": "2026-08-24",
+    "position": "Data Platform Administrator",
+    "manager": "Platform Demo Lead",
+    "city": "Test City",
+    "full_name": "Demo Data Administrator",
+    "hr_contact": "IT Demo HR",
+    "buddy": "Platform Demo Buddy",
+    "work_format": "hybrid",
+    "department": "Platform Team"
+  },
+  "accounts": {
+    "email_domain": "test12systems.ru",
+    "sender_email": "hr@test12systems.ru",
+    "suggested_login": "demoda",
+    "suggested_email": "demoda@test12systems.ru"
+  },
+  "open_questions": [
+    "Доступ к 'TEST-DB-REPORTING' требует согласования владельца ресурса.",
+    "Доступ к 'TEST-SERVER-APP' требует согласования владельца ресурса.",
+    "Доступ к 'TEST-MONITORING' требует согласования владельца ресурса."
+  ]
+}
