@@ -3,7 +3,8 @@
 ## 1. Запустить
 
 ```powershell
-cd C:\Users\Алла\Documents\Code\VibeComm\agents\Onboarding\Onboarding-Public
+git clone https://github.com/allacommerce999/Onboarding.git
+cd Onboarding
 .\tools\start_onboarding_agent.ps1
 ```
 

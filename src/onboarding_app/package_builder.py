@@ -86,7 +86,7 @@ def _safe_output_dir(project_root: Path, value: str) -> Path:
     try:
         resolved.relative_to(project_root)
     except ValueError as error:
-        raise PackageBuildError(["Папка вывода должна находиться внутри Onboarding-Public."]) from error
+        raise PackageBuildError(["Папка вывода должна находиться внутри папки проекта Onboarding."]) from error
     return resolved
 
 
